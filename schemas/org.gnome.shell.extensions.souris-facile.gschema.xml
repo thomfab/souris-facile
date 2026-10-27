@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="org.gnome.shell.extensions.souris-facile" path="/org/gnome/shell/extensions/souris-facile/">
+    <key name="move-modifiers" type="as">
+      <default>['alt', 'super']</default>
+      <summary>Modifiers that move the window under the pointer</summary>
+      <description>Any of: shift, control, alt, super. The combination must match exactly. An empty list disables moving.</description>
+    </key>
+    <key name="resize-modifiers" type="as">
+      <default>['control', 'alt', 'super']</default>
+      <summary>Modifiers that resize the window under the pointer</summary>
+      <description>Any of: shift, control, alt, super. The combination must match exactly. An empty list disables resizing.</description>
+    </key>
+    <key name="raise-window" type="b">
+      <default>false</default>
+      <summary>Raise the window when it starts being moved or resized</summary>
+    </key>
+    <key name="resize-nearest-corner" type="b">
+      <default>true</default>
+      <summary>Resize from the corner nearest the pointer</summary>
+      <description>When false, resizing always moves the bottom-right corner.</description>
+    </key>
+    <key name="snap-threshold" type="i">
+      <range min="0" max="200"/>
+      <default>16</default>
+      <summary>Edge snapping distance in pixels</summary>
+      <description>Window edges within this distance of a screen edge (or another window's edge) snap to it. 0 disables snapping. Ignored while the grid is enabled.</description>
+    </key>
+    <key name="snap-to-windows" type="b">
+      <default>true</default>
+      <summary>Also snap to the edges of other windows</summary>
+    </key>
+    <key name="grid-enabled" type="b">
+      <default>false</default>
+      <summary>Snap window edges to a grid</summary>
+    </key>
+    <key name="grid-columns" type="i">
+      <range min="1" max="48"/>
+      <default>4</default>
+      <summary>Number of grid columns per monitor</summary>
+    </key>
+    <key name="grid-rows" type="i">
+      <range min="1" max="48"/>
+      <default>3</default>
+      <summary>Number of grid rows per monitor</summary>
+    </key>
+    <key name="saved-grids" type="a(sii)">
+      <default>[]</default>
+      <summary>User-saved grid sizes</summary>
+      <description>A list of (name, columns, rows).</description>
+    </key>
+    <key name="show-grid" type="b">
+      <default>true</default>
+      <summary>Show the grid while moving or resizing</summary>
+    </key>
+  </schema>
+</schemalist>
