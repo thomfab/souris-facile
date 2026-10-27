@@ -4,5 +4,6 @@
   "description": "Move or resize the window under the pointer by holding modifier keys and moving the mouse — no clicking needed.",
   "shell-version": ["51"],
   "settings-schema": "org.gnome.shell.extensions.souris-facile",
-  "url": ""
+  "url": "https://github.com/thomfab/souris-facile",
+  "version-name": "0.1"
 }

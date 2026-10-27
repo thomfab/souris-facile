@@ -6,7 +6,9 @@ aiming for a title bar or a window border.
 
 ## Why
 
-<!-- Explain here why you made this extension. -->
+I've always struggled with window management, be it on Windows, MacOS or Linux. Windows always overlap, grabbing the titlebar is harder and harder (with controls embedded in the title bar now), and resizing is always challenging (2x2 pixels area in bottom right anyone ?). I thought tiling window managers would help and tried several, but the forced tiles are not for me. Then I tried [Moom](https://manytricks.com/moom/) on the Mac, and bought the one feature I really use: the Hover feature (for me, option+cmd and then move the mouse to move the window under the cursor, and ctrl+option+cmd to resize). This Gnome extension reproduces this feature. If you find it useful, use it.
+
+(Disclaimer: Claude Code helped me)
 
 ## How it works
 
@@ -92,3 +94,8 @@ To uninstall, disable it and run `make unlink`.
 | `make pack`   | Build a `.shell-extension.zip`                         |
 | `make nested` | Run a nested GNOME Shell for testing (needs mutter-devkit) |
 | `make logs`   | Follow GNOME Shell's logs                              |
+
+## License
+
+Souris Facile is licensed under the GNU General Public License, version 2 or
+(at your option) any later version. See [LICENSE](LICENSE).
