@@ -2,7 +2,7 @@
 <schemalist>
   <schema id="org.gnome.shell.extensions.souris-facile" path="/org/gnome/shell/extensions/souris-facile/">
     <key name="move-modifiers" type="as">
-      <default>['alt', 'super']</default>
+      <default>['control', 'alt']</default>
       <summary>Modifiers that move the window under the pointer</summary>
       <description>Any of: shift, control, alt, super. The combination must match exactly. An empty list disables moving.</description>
     </key>
@@ -52,6 +52,10 @@
     <key name="show-grid" type="b">
       <default>true</default>
       <summary>Show the grid while moving or resizing</summary>
+    </key>
+    <key name="dim-windows" type="b">
+      <default>true</default>
+      <summary>Dim other windows while moving or resizing with the grid</summary>
     </key>
   </schema>
 </schemalist>

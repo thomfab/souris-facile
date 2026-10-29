@@ -5,5 +5,5 @@
   "shell-version": ["51"],
   "settings-schema": "org.gnome.shell.extensions.souris-facile",
   "url": "https://github.com/thomfab/souris-facile",
-  "version-name": "0.1"
+  "version-name": "0.2"
 }

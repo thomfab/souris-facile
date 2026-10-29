@@ -101,7 +101,14 @@ function buildGridGroup(settings) {
     settings.bind('show-grid', showRow, 'active', Gio.SettingsBindFlags.DEFAULT);
     group.add(showRow);
 
-    for (const row of [sizeRow, columnsRow, rowsRow, showRow])
+    const dimRow = new Adw.SwitchRow({
+        title: 'Dim other windows',
+        subtitle: 'Darken everything but the window being moved or resized',
+    });
+    settings.bind('dim-windows', dimRow, 'active', Gio.SettingsBindFlags.DEFAULT);
+    group.add(dimRow);
+
+    for (const row of [sizeRow, columnsRow, rowsRow, showRow, dimRow])
         settings.bind('grid-enabled', row, 'sensitive', Gio.SettingsBindFlags.GET);
 
     return group;

@@ -19,6 +19,7 @@ const MIN_HEIGHT = 60;
 
 const GRID_LINE_WIDTH = 2;
 const GRID_LINE_STYLE = 'background-color: rgba(255, 255, 255, 0.35);';
+const DIM_STYLE = 'background-color: rgba(0, 0, 0, 0.5);';
 
 const MANAGEABLE_TYPES = [
     Meta.WindowType.NORMAL,
@@ -80,6 +81,7 @@ export default class SourisFacileExtension extends Extension {
         this._op = Op.NONE;
         this._window = null;
         this._gridOverlay = null;
+        this._dimmer = null;
 
         this._cursorTracker = global.backend.get_cursor_tracker();
         this._positionId = this._cursorTracker.connect('position-invalidated',
@@ -107,6 +109,7 @@ export default class SourisFacileExtension extends Extension {
         this._gridColumns = this._settings.get_int('grid-columns');
         this._gridRows = this._settings.get_int('grid-rows');
         this._showGrid = this._settings.get_boolean('show-grid');
+        this._dimWindows = this._settings.get_boolean('dim-windows');
     }
 
     _opForModifiers(mods) {
@@ -174,6 +177,9 @@ export default class SourisFacileExtension extends Extension {
         if (this._raiseWindow)
             window.raise();
 
+        if (this._gridEnabled && this._dimWindows)
+            this._showDimmer(window);
+
         if (window.is_maximized()) {
             if (op === Op.RESIZE) {
                 // Keep the maximized geometry as the starting point.
@@ -194,6 +200,7 @@ export default class SourisFacileExtension extends Extension {
         this._workAreas = null;
         this._otherRects = null;
         this._hideGridOverlay();
+        this._hideDimmer();
     }
 
     _updateMove(x, y) {
@@ -362,6 +369,38 @@ export default class SourisFacileExtension extends Extension {
         this._gridOverlay?.destroy();
         this._gridOverlay = null;
         this._gridOverlayMonitor = -1;
+    }
+
+    // Darken everything but the window being moved or resized: a dark layer
+    // over all windows, with a live copy of that window on top of it, so it
+    // stays bright even when other windows are stacked above it.
+    _showDimmer(window) {
+        const actor = window.get_compositor_private();
+        if (!actor)
+            return;
+
+        const dimmer = new St.Widget({
+            x: 0,
+            y: 0,
+            width: global.stage.width,
+            height: global.stage.height,
+            style: DIM_STYLE,
+            reactive: false,
+        });
+        const clone = new Clutter.Clone({source: actor, reactive: false});
+        clone.add_constraint(new Clutter.BindConstraint({
+            source: actor,
+            coordinate: Clutter.BindCoordinate.POSITION,
+        }));
+        dimmer.add_child(clone);
+
+        global.window_group.add_child(dimmer);
+        this._dimmer = dimmer;
+    }
+
+    _hideDimmer() {
+        this._dimmer?.destroy();
+        this._dimmer = null;
     }
 
     _findWindowAt(x, y) {
